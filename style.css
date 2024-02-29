@@ -1,0 +1,22 @@
+body {
+	color: white;
+	background: black;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+.links {
+	text-align: center;
+}
+
+#linkedin {
+	width: 30px;
+	height: auto;
+}
+
+
