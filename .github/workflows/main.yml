@@ -20,9 +20,12 @@ jobs:
       
     - name: Install dependencies
       run: |
+        pip install chevron &
         cd gallery
         git checkout live
-        pip install chevron
+        git fetch --all
+        git reset --hard origin/main
+        
       
     - name: Run gallery script
       run: |
