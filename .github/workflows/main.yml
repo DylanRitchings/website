@@ -22,7 +22,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install chevron &
-        cd gallery
         git fetch
         git checkout live
         git reset --hard origin/main
@@ -30,7 +29,7 @@ jobs:
       
     - name: Run gallery script
       run: |
-        python gallery.py
+        python gallery/gallery.py
       
     - name: Commit and push changes to live branch
       env:
