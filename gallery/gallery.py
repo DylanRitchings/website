@@ -1,5 +1,6 @@
 import chevron
 import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 folder = "./photos/"
 page_folder = "./image_pages/"
@@ -73,6 +74,10 @@ gallery_count = 0
 
 file_list = os.listdir(folder)
 file_list_len = len(file_list)-1
+
+if not os.path.exists('image_pages'):
+    os.makedirs('image_pages')
+
 
 for idx, file in enumerate(file_list):
     ext=file.split(".")[-1]
