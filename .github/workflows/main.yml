@@ -27,7 +27,7 @@ jobs:
       
     - name: Run gallery script
       run: |
-        cd gallery
+        cd templates
         python gallery.py
         git config --global user.name 'Dylan Ritchings'
         git config --global user.email 'DylanRitchings@users.noreply.github.com'
