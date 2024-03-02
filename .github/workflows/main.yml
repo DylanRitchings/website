@@ -34,7 +34,8 @@ jobs:
         python gallery.py
         git config --global user.name 'Dylan Ritchings'
         git config --global user.email 'DylanRitchings@users.noreply.github.com'
-        git commit -am "auto-generated html"
+        git add .
+        git commit -m "auto-generated html"
         git push origin live --force
   
 
