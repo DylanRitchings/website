@@ -2,12 +2,13 @@ import chevron
 import os
 
 folder = "./photos/"
+page_folder = "./image_pages/"
 
 def create_image_file(image_list, img_idx):
+    image_folder = "../photos/"
     current_image = image_list[img_idx].split(".")[0]
-    
     args = {
-        "image_path": f"{current_image}.jpg",
+        "image_path": f"{image_folder}{current_image}.jpg",
         "small_images": []
     }
 
@@ -23,23 +24,27 @@ def create_image_file(image_list, img_idx):
     else:
         args["next_image"] = "#"
 
+
     for idx, image in enumerate(image_list):
+        if idx < img_idx:
+            alignment = "left"
+        elif idx > img_idx:
+            alignment = "right"
+        else:
+            alignment = "center"
         args["small_images"].append(
             {   
                 
                 "link": f"{image.split(".")[0]}.html",
-                "src": f"{image}",
-                "ismain": "main_image" if image_idx==idx else ""
+                "src": f"{image_folder}{image}",
+                "alignment": alignment
             }
         )
-
     with open("image-template.html", "r") as f:
         output = chevron.render(f, args)
-    with open(f"{folder}{current_image}.html", "w") as f:
+    with open(f"{page_folder}{current_image}.html", "w") as f:
         f.write(output)
 
-
-        
 
 def create_gallery_file(image_list):
     args = {
@@ -50,11 +55,10 @@ def create_gallery_file(image_list):
 
         args["gallery"].append(
                 {
-                "link": f"{folder}{image.split(".")[0]}.html",
+                "link": f"{page_folder}{image.split(".")[0]}.html",
                 "src": f"{folder}{image}"
             }
         )
-    print(args)
     with open("gallery-template.html", "r") as f:
         output = chevron.render(f, args)
     with open("gallery.html", "w") as f:
@@ -81,15 +85,15 @@ for idx, file in enumerate(file_list):
         next_image_list = file_list[start_idx:end_idx]
         create_image_file(next_image_list, image_idx)
         next_image_list = []
-        
+
         if gallery_count >= 20 or idx >= file_list_len:
             gallery_count = 0
-            print("here")
             create_gallery_file(gallery_list)
             gallery_list = []
             
         next_image_list.append(file)
         gallery_list.append(file)
+        gallery_count+=1
 
 
 
