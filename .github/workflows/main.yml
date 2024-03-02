@@ -20,7 +20,7 @@ jobs:
       
     - name: Install dependencies
       run: |
-        pip install chevron &
+        pip install chevron
         cd gallery
         git checkout live
         git fetch --all
