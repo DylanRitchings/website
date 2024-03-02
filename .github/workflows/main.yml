@@ -29,7 +29,8 @@ jobs:
       
     - name: Run gallery script
       run: |
-        python gallery/gallery.py
+        cd gallery
+        python gallery.py
       
     - name: Commit and push changes to live branch
       env:
