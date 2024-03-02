@@ -23,6 +23,7 @@ jobs:
       run: |
         pip install chevron &
         cd gallery
+        git branch
         git checkout live
         git reset --hard origin/main
         
