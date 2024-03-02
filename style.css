@@ -28,7 +28,7 @@ h1 {
 .topnav {
   background-color: #333;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .sitelinks a {
@@ -54,3 +54,24 @@ h1 {
 	text-align: right;
 	margin: 9px;
 }
+
+footer {
+	background-color: #333;
+	overflow: hidden;
+	border-radius: 6px;
+	width: 60%; 
+	position: fixed;
+	bottom: 0;
+	text-align: center; 
+	display: flex;
+	justify-content: center;
+	padding-top: 5px
+}
+
+.footer {
+
+	margin-top: auto;
+	margin-bottom: auto;
+	text-align: center;
+}
+

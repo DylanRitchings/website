@@ -181,3 +181,15 @@ a:hover {
 	bottom: 0;
 	    z-index: 998;
 }
+
+.tray_icon {
+	opacity: 0.4;
+	display: inline-block;
+	color: white;
+	position: absolute;
+	font-size: 200%;
+	bottom: 0;
+	left: 50%;
+	right: 50%
+
+}
