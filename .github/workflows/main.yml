@@ -31,13 +31,18 @@ jobs:
       run: |
         cd gallery
         python gallery.py
-      
-    - name: Commit and push changes to live branch
-      env:
-        GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      run: |
-        git config --global user.email "${GIT_USER_EMAIL}"
-        git config --global user.name "Dylan Ritchings"
         git add .
-        git commit -m "Update gallery"
-        git push origin live
+        git commit -m "auto-generate html"
+  
+      
+    - name: Pushes to Repository
+      uses: tech-thinker/push-to-repo@live
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
+      with:
+        user-name: "github-actions[bot]"
+        user-email: github-actions[bot]@users.noreply.github.com
+        source-directory: "website"
+        destination-github-username: "DylanRitchings"
+        destination-repository-name: "website"
+        target-branch: live
