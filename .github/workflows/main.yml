@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - live
 permissions:
   contents: write
 jobs:
@@ -24,9 +23,7 @@ jobs:
       run: |
         pip install chevron &
         git fetch
-        git checkout live
-        git reset --hard origin/main
-        
+        git checkout -b live        
       
     - name: Run gallery script
       run: |
