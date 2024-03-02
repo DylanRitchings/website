@@ -1,0 +1,183 @@
+
+body {	
+	color: white;
+	background: black;
+	max-width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	margin-bottom: 0;
+}
+
+hr {
+	max-width: 90%;
+	height: 3px;
+	background: white;
+	border-radius: 6px;
+	border: 0;
+	margin-bottom: 2%;
+}
+
+.photo{
+	/* max-width: 20%; */
+	/* max-height: 20%; */
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+.small_photo{
+	/* max-width: 20%; */
+	/* max-height: 20%; */
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.small_photo_div{
+	width: 250px;
+	overflow: hidden;
+	height: 150px;
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+
+
+.large_photo_div{
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
+}
+
+.large_photo{
+	height: 98vh;
+	width: auto;
+}
+
+.contents{
+        text-align: center; 
+}
+
+.gallery{
+	display: inline-block; 
+}
+
+.exit {	
+	text-decoration: none;
+	display: inline-block;
+	font-size: 300%;
+	color: white;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+
+}
+
+.next, .previous{
+	text-decoration: none;
+	display: inline-block;
+	font-size: 900%;
+	color: white;
+	position: absolute;
+	top: 50%;
+	transform: translate(0%,-50%);
+}
+
+.previous{
+        position: absolute;
+	left: 0;
+
+}
+
+.next {
+        position: absolute;
+	right: 0;
+
+}
+
+
+
+
+ .center {
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 2px;
+    margin-left: auto; /* Change margin-left to auto */
+    margin-right: auto; /* Change margin-right to auto */
+}
+
+
+
+.left {
+    margin-right: auto; /* Add margin-right: auto */
+}
+
+.right {
+    margin-left: auto; /* Add margin-left: auto */
+}
+
+
+.smaller_photo_div{
+	width: 200px;
+	overflow: hidden;
+	height: 130px;
+	/* margin-bottom: 5px; */
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+a:hover {
+	color: gray;
+}
+
+.trayhover {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
+}
+
+.next_images {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50vw; 
+	opacity: 0;
+	transform: translateY(100%);
+	transition: transform 0.5s, opacity 0.5s;
+	z-index: 999;
+	bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.tray_hover:hover .next_images{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tray_btn {
+	opacity: 0;
+	width: 100vw;
+	height: 10vw;
+}
+
+.tray_hover {
+	text-decoration: none;
+	display: inline-block;
+	color: white;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	    z-index: 998;
+}

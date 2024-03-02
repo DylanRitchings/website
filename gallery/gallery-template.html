@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Dylan's site</title>
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<meta charset="utf-8"/>
+</head>
+
+<body>
+	<div class="topnav">
+	<div class="sitelinks">
+	<a  href="../index.html">Home</a>
+	  <a class="active" href="./gallery.html">Gallery</a>
+
+	</div>
+	<div class="extlinks">
+	<a href="https://github.com/DylanRitchings"><img src="../images/github.svg"/></a>
+	<a href="https://www.linkedin.com/in/dylan-ritchings/"><img id="linkedin" src="../images/linkedin.svg"/></a>
+	</div>
+	</div>
+
+		<div class="contents">
+<h1>Gallery</h1>
+<hr/>
+
+
+<div class="gallery">
+
+{{#gallery}}
+<a href='{{link}}'> <div class='small_photo_div'><img class='photo' src='{{src}}'/></div></a>
+{{/gallery}}
+
+			</div>
+</div>
+</body>
+</html>
