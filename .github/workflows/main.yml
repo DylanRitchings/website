@@ -5,17 +5,18 @@ on:
     branches:
       - main
       - live
-
+permissions:
+  contents: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout main branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.x
       
@@ -31,18 +32,9 @@ jobs:
       run: |
         cd gallery
         python gallery.py
-        git add .
-        git commit -m "auto-generate html"
+        git config --global user.name 'Dylan Ritchings'
+        git config --global user.email 'DylanRitchings@users.noreply.github.com'
+        git commit -am "auto-generated html"
+        git push origin live --force
   
-      
-    - name: Pushes to Repository
-      uses: tech-thinker/push-to-repo@live
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
-      with:
-        user-name: "github-actions[bot]"
-        user-email: github-actions[bot]@users.noreply.github.com
-        source-directory: "website"
-        destination-github-username: "DylanRitchings"
-        destination-repository-name: "website"
-        target-branch: live
+
