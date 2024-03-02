@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - live
 
 jobs:
   deploy:
@@ -20,11 +21,9 @@ jobs:
       
     - name: Install dependencies
       run: |
-        pip install chevron
+        pip install chevron &
         cd gallery
-        git branch
         git checkout live
-        git fetch --all
         git reset --hard origin/main
         
       
