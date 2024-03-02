@@ -33,7 +33,7 @@ def create_image_file(image_list, img_idx):
             }
         )
 
-    with open("image.html", "r") as f:
+    with open("image-template.html", "r") as f:
         output = chevron.render(f, args)
     with open(f"{folder}{current_image}.html", "w") as f:
         f.write(output)
@@ -55,9 +55,9 @@ def create_gallery_file(image_list):
             }
         )
     print(args)
-    with open("gallery.html", "r") as f:
+    with open("gallery-template.html", "r") as f:
         output = chevron.render(f, args)
-    with open("gallery-output.html", "w") as f:
+    with open("gallery.html", "w") as f:
         f.write(output)
        
 
