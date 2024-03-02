@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Dylan's site</title>
+	<link rel="stylesheet" type="text/css" href="../../style.css"/>
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
+	<meta charset="utf-8"/>
+</head>
+
+<body>
+
+<div>
+
+<div class="large_photo_div"><a href="{{prev_image}}" class="previous">&#8249;</a>
+<img class="large_photo" src="{{image_path}}"/>
+<a href="{{next_image}}" class="next">&#8250;</a></div>
+<div class="smaller_section">
+{{#small_images}}
+<a href="{{link}}"><div class="smaller_photo_div {{ismain}}"><img class="photo" src="{{src}}"/></div></a>
+{{/small_images}}
+</div>
+
+</div>
+</body>
+</html>

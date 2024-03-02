@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Dylan's site</title>
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<meta charset="utf-8"/>
+</head>
+
+<body>
+
+	
+<div class="gallery">
+
+<h1>Gallery</h1>
+<hr/>
+
+{{#gallery}}
+<a href='{{link}}'> <div class='small_photo_div'><img class='photo' src='{{src}}'/></div></a>
+{{/gallery}}
+
+
+</div>
+</body>
+</html>
