@@ -1,0 +1,39 @@
+name: Gallery Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+      
+    - name: Install dependencies
+      run: |
+        cd gallery
+        git checkout live
+        pip install chevron
+      
+    - name: Run gallery script
+      run: |
+        python gallery.py
+      
+    - name: Commit and push changes to live branch
+      env:
+        GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      run: |
+        git config --global user.email "${GIT_USER_EMAIL}"
+        git config --global user.name "Dylan Ritchings"
+        git add .
+        git commit -m "Update gallery"
+        git push origin live
