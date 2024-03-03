@@ -1,13 +1,26 @@
 import chevron
 import os
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+from PIL import Image 
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 folder = "../gallery/photos/"
+
+image_folder = "photos/"
+thumb_folder = "thumbnails/"
 page_folder = "../gallery/" #TODO uppercase these
 GALLERY_AMOUNT = 16
 
+def create_thumbnails(image):
+    thumb_path = f"{folder}{thumb_folder}"
+    if not os.path.exists(thumb_path):
+        os.makedirs(thumb_path)
+    thumb_path = f"{thumb_path}{image}"
+    if not os.path.exists(thumb_path):
+        im = Image.open(f"{folder}{image}")
+        im.save(thumb_path, "JPEG", quality=20)
+
+
 def create_image_file(image_list, img_idx, gallery_num):
-    image_folder = "photos/"
     current_image = image_list[img_idx].split(".")[0]
     args = {
         "gallery": f"gallery{gallery_num}.html",
@@ -39,7 +52,7 @@ def create_image_file(image_list, img_idx, gallery_num):
             {   
                 
                 "link": f"{image.split(".")[0]}.html",
-                "src": f"{image_folder}{image}",
+                "src": f"{image_folder}{thumb_folder}{image}",
                 "alignment": alignment
             }
         )
@@ -63,7 +76,7 @@ def create_gallery_file(image_list, gallery_num):
         args["gallery"].append(
                 {
                 "link": f"{page_folder}{image.split(".")[0]}.html",
-                "src": f"{folder}{image}"
+                "src": f"{folder}{thumb_folder}{image}"
             }
         )
     with open("gallery-template.html", "r") as f:
@@ -81,13 +94,12 @@ gallery_num = 1
 file_list = os.listdir(folder)
 file_list_len = len(file_list) -1
 
-if not os.path.exists('image_pages'):
-    os.makedirs('image_pages')
-
 
 for idx, file in enumerate(file_list):
     ext=file.split(".")[-1]
     if ext == "jpg":
+
+        create_thumbnails(file)
 
         next_image_list.append(file)
         gallery_list.append(file)

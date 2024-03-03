@@ -140,29 +140,13 @@ hr {
 }
 
 
- .center {
-    box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 2px;
-    margin-left: auto; /* Change margin-left to auto */
-    margin-right: auto; /* Change margin-right to auto */
-}
 
-
-
-.left {
-    margin-right: auto; /* Add margin-right: auto */
-}
-
-.right {
-    margin-left: auto; /* Add margin-left: auto */
-}
 
 
 .smaller_photo_div{
-	width: 200px;
+	width: 14vw;
 	overflow: hidden;
-	height: 130px;
+	height: auto;
 	/* margin-bottom: 5px; */
 	display: flex;
 	flex-wrap: wrap;
@@ -185,18 +169,35 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 50vw; 
+	width: 100vw; 
 	opacity: 0;
 	transform: translateY(100%);
 	transition: transform 0.5s, opacity 0.5s;
 	z-index: 999;
 	bottom: 0;
-	margin-left: auto;
-	margin-right: auto;
+	/* margin-left: auto; */
+	/* margin-right: auto; */
 	
 }
 
+ .center {
+	align-self: center;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 2px;
+    margin-left: auto; /* Change margin-left to auto */
+    margin-right: auto; /* Change margin-right to auto */
+}
 
+
+
+.left {
+    margin-right: auto; /* Add margin-right: auto */
+}
+
+.right {
+    margin-left: auto; /* Add margin-left: auto */
+}
 @media (max-width: 1200px)  {
 	.next_images {
 		position: absolute;
