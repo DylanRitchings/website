@@ -2,9 +2,17 @@
 body {	
 	color: white;
 	background: black;
-	max-width: 90%;
 	margin-left: auto;
 	margin-right: auto;
+	    overflow-x: hidden;
+}
+
+
+
+@media (min-width: 1200px)  {
+	body{
+	max-width: 90%;
+	}
 }
 
 h1 {
@@ -44,9 +52,17 @@ hr {
 	overflow: hidden;
 	display: inline-block;
 	margin-bottom: 5px;
+	max-height: 200px;
 }
 
-
+@media (max-width: 1200px)  {
+    .small_photo_div {
+        width: 40vw; /* 90% of the viewport width */
+        height: auto; /* Let the height adjust according to the content */
+        max-height: 200px; /* Set a maximum height in pixels */
+        margin-bottom: 10px; /* Increase margin for better spacing */
+    }
+}
 
 .large_photo_div{
 	display: inline-block;
@@ -57,8 +73,9 @@ hr {
 }
 
 .large_photo{
-	height: 98vh;
-	width: auto;
+	max-height: 98vh;
+	max-width: 98vw
+	
 }
 
 .contents{
@@ -83,11 +100,9 @@ hr {
 .next, .previous{
 	text-decoration: none;
 	display: inline-block;
-	font-size: 900%;
+	font-size: 10vw;
 	color: white;
-	position: absolute;
 	top: 50%;
-	transform: translate(0%,-50%);
 }
 
 .previous{
@@ -102,7 +117,27 @@ hr {
 
 }
 
+@media (max-width: 1200px)  {
+.next, .previous{
+	bottom: 5vh;
+	margin-top: 10vh;
+	text-decoration: none;
+	font-size: 20vw;
+	color: white;
+}
 
+.previous{
+        position: absolute;
+	left: 0;
+
+}
+
+.next {
+        position: absolute;
+	right: 0;
+
+}
+}
 
 
  .center {
@@ -161,29 +196,21 @@ a:hover {
 	
 }
 
-.tray_hover:hover .next_images{
-  opacity: 1;
-  transform: translateY(0);
-}
 
-.tray_btn {
-	opacity: 0;
-	width: 100vw;
-	height: 10vw;
-}
-
-.tray_hover {
-	text-decoration: none;
-	display: inline-block;
-	color: white;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	    z-index: 998;
+@media (max-width: 1200px)  {
+	.next_images {
+		position: absolute;
+		opacity: 1;
+		transition: 0;
+		transform: 0;
+		bottom: 16vh;
+		left: 0;
+		right: 0;
+		}
 }
 
 .tray_icon {
-	opacity: 0.4;
+	opacity: 0;
 	display: inline-block;
 	color: white;
 	position: absolute;
@@ -191,5 +218,34 @@ a:hover {
 	bottom: 0;
 	left: 50%;
 	right: 50%
+}
+
+.tray_btn {
+	opacity: 0;
+	width: 100vw;
+	height: 10vw;
+	}
+
+@media (min-width: 1200px)  {
+	.tray_icon {
+	opacity: 0.4;
+
+	}
+
+
+	.tray_hover:hover .next_images{
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+
+	.tray_hover {
+		text-decoration: none;
+		display: inline-block;
+		color: white;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 998;
+	}
 
 }
