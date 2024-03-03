@@ -5,6 +5,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	    overflow-x: hidden;
+
 }
 
 
@@ -29,30 +30,29 @@ hr {
 }
 
 .photo{
-	/* max-width: 20%; */
-	/* max-height: 20%; */
-	width: 100%;
-	height: auto;
+	max-width: 100%; 
+	object-fit: scale-down;
 	overflow: hidden;
 }
 
 .small_photo{
-	/* max-width: 20%; */
-	/* max-height: 20%; */
-	width: 100%;
-	height: auto;
+	max-width: 100%; 
 	overflow: hidden;
-	margin-left: auto;
-	margin-right: auto;
+
 }
 
 .small_photo_div{
 	width: 19vw;
-	height: 19vh;
+	height: 11vw;
 	overflow: hidden;
 	display: inline-block;
 	margin-bottom: 5px;
-	max-height: 200px;
+}
+
+
+.small_photo_div::before {
+  display: block;
+  padding-top: 53.25%; 
 }
 
 @media (max-width: 1200px)  {
@@ -79,6 +79,7 @@ hr {
 }
 
 .contents{
+	padding-top: 17px;
         text-align: center; 
 }
 
@@ -139,17 +140,12 @@ hr {
 }
 }
 
-
-
-
-
 .smaller_photo_div{
 	width: 14vw;
+	height: 9vw;
 	overflow: hidden;
-	height: auto;
-	/* margin-bottom: 5px; */
-	display: flex;
-	flex-wrap: wrap;
+	display: inline-block;
+	 margin-bottom: 5px;
 }
 
 
@@ -169,6 +165,7 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 	width: 100vw; 
 	opacity: 0;
 	transform: translateY(100%);
@@ -181,15 +178,9 @@ a:hover {
 }
 
  .center {
-	align-self: center;
-    box-sizing: border-box;
     border: 2px solid white;
     border-radius: 2px;
-    margin-left: auto; /* Change margin-left to auto */
-    margin-right: auto; /* Change margin-right to auto */
 }
-
-
 
 .left {
     margin-right: auto; /* Add margin-right: auto */
