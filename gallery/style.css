@@ -39,9 +39,9 @@ hr {
 }
 
 .small_photo_div{
-	width: 30%;
+	width: 19vw;
+	height: 19vh;
 	overflow: hidden;
-	height: 20%;
 	display: inline-block;
 	margin-bottom: 5px;
 }
