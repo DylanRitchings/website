@@ -21,6 +21,7 @@ jobs:
       
     - name: Install dependencies
       run: |
+        pip install pillow
         pip install chevron &
         git fetch
         git checkout -b live        
