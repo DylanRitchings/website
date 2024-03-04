@@ -4,7 +4,7 @@ body {
 	background: black;
 	margin-left: auto;
 	margin-right: auto;
-	    overflow-x: hidden;
+	overflow-x: hidden;
 
 }
 
@@ -74,7 +74,14 @@ hr {
 
 .large_photo{
 	max-height: 98vh;
-	max-width: 98vw
+	max-width: 98vw;
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	transform: translate(-50%, -50%); 
+}
+
+.placeholder{
 	
 }
 

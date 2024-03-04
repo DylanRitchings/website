@@ -7,8 +7,14 @@ folder = "../gallery/photos/"
 
 image_folder = "photos/"
 thumb_folder = "thumbnails/"
-page_folder = "../gallery/" #TODO uppercase these
+page_folder = "../gallery/" #TODO uppercase these, also rename 
 GALLERY_AMOUNT = 16
+
+def create_progressive(image):
+    path = f"{folder}{image}" 
+    if not os.path.exists(path):
+        im = Image.open(f"{folder}original/{image}")
+        im.save(path, quality=100, progressive=True)
 
 def create_thumbnails(image):
     thumb_path = f"{folder}{thumb_folder}"
@@ -16,8 +22,9 @@ def create_thumbnails(image):
         os.makedirs(thumb_path)
     thumb_path = f"{thumb_path}{image}"
     if not os.path.exists(thumb_path):
-        im = Image.open(f"{folder}{image}")
-        im.save(thumb_path, "JPEG", quality=20)
+        im = Image.open(f"{folder}original/{image}")
+        im.save(thumb_path, "JPEG", quality=20, progressive=True)
+        # im.save(f"{thumb_path}pholder_", "JPEG", quality=5, progressive=True)
 
 
 def create_image_file(image_list, img_idx, gallery_num):
@@ -25,6 +32,7 @@ def create_image_file(image_list, img_idx, gallery_num):
     args = {
         "gallery": f"gallery{gallery_num}.html",
         "image_path": f"{image_folder}{current_image}.jpg",
+        "placeholder": f"{image_folder}{thumb_folder}{current_image}.jpg",
         "small_images": []
     }
 
@@ -91,7 +99,7 @@ next_image_list = [] #5 per page
 
 gallery_count = 0
 gallery_num = 1
-file_list = os.listdir(folder)
+file_list = os.listdir(f"{folder}original")
 file_list_len = len(file_list) -1
 
 
@@ -100,7 +108,7 @@ for idx, file in enumerate(file_list):
     if ext == "jpg":
 
         create_thumbnails(file)
-
+        create_progressive(file)
         next_image_list.append(file)
         gallery_list.append(file)
 
