@@ -20,11 +20,13 @@ def create_thumbnails(image):
     thumb_path = f"{folder}{thumb_folder}"
     if not os.path.exists(thumb_path):
         os.makedirs(thumb_path)
-    thumb_path = f"{thumb_path}{image}"
-    if not os.path.exists(thumb_path):
+    thumb_filepath = f"{thumb_path}{image}"
+    
+    if not os.path.exists(thumb_filepath):
         im = Image.open(f"{folder}original/{image}")
-        im.save(thumb_path, "JPEG", quality=20, progressive=True)
-        # im.save(f"{thumb_path}pholder_", "JPEG", quality=5, progressive=True)
+        ph = im.copy()
+        im.save(thumb_filepath, "JPEG", quality=20, progressive=True)
+        ph.save(f"{thumb_path}placeholder/{image}", "JPEG", quality=5, progressive=True)
 
 
 def create_image_file(image_list, img_idx, gallery_num):
@@ -84,7 +86,8 @@ def create_gallery_file(image_list, gallery_num):
         args["gallery"].append(
                 {
                 "link": f"{page_folder}{image.split(".")[0]}.html",
-                "src": f"{folder}{thumb_folder}{image}"
+                "src": f"{folder}{thumb_folder}{image}",
+                "placeholder": f"{folder}{thumb_folder}placeholder/{image}"
             }
         )
     with open("gallery-template.html", "r") as f:
@@ -99,14 +102,13 @@ next_image_list = [] #5 per page
 
 gallery_count = 0
 gallery_num = 1
-file_list = os.listdir(f"{folder}original")
+file_list = os.listdir(f"{folder}original/")
 file_list_len = len(file_list) -1
 
 
 for idx, file in enumerate(file_list):
     ext=file.split(".")[-1]
     if ext == "jpg":
-
         create_thumbnails(file)
         create_progressive(file)
         next_image_list.append(file)

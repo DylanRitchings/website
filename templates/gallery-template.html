@@ -30,10 +30,15 @@
 <div class="gallery">
 
 {{#gallery}}
-<a href='{{link}}'> <div class='small_photo_div'><img class='photo' src='{{src}}'/></div></a>
+<a href='{{link}}'> 
+
+	<div class='gallery_div'>
+		<img class='photo gallery_photo main_photo' src='{{src}}' loading="lazy"/>
+		<img class='photo gallery_photo placeholder' src='{{placeholder}}' loading="eager"/>
+				</div></a>
 {{/gallery}}
 
-</div>
+</div class="arrow_bar">
 <a href="{{prev_gallery}}" class="previous">&#8249;</a>
 <a href="{{next_gallery}}" class="next">&#8250;</a>
 </div>

@@ -6,6 +6,11 @@
 	margin-right: auto;
 }
 
+@media (max-width: 1200px)  {
+	.homebody {
+	max-width: 90%
+	}
+}
 .contents{
 	margin-top: 10px;
 	padding: 4px;

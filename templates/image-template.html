@@ -15,7 +15,8 @@
 <div>
 <div class="large_photo_div">
 <img class="large_photo placeholder" src="{{placeholder}}"/>
-<img class="large_photo" src="{{image_path}}"/>
+<img class="large_photo main_photo" src="{{image_path}}"/>
+
 </div>
 
 <a href="{{prev_image}}" class="previous">&#8249;</a>
@@ -25,7 +26,7 @@
 <button class="tray_btn"></button>
 <div class="next_images">
 {{#small_images}}
-<a href="{{link}}"><div class="smaller_photo_div {{alignment}}"><img class="small_photo" src="{{src}}"/></div></a>
+<a href="{{link}}"><div class="selector_div {{alignment}}"><img class="selector_photo" src="{{src}}"/></div></a>
 {{/small_images}}
 </div>
 
