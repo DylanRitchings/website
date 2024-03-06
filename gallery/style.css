@@ -8,7 +8,9 @@ body {
 
 }
 
-
+.image_body{
+	overflow: hidden;
+}
 
 @media (min-width: 1200px)  {
 	body{
@@ -178,16 +180,17 @@ hr {
 	text-decoration: none;
 	font-size: 20vw;
 	color: white;
-	z-index: 5;
 }
 
 .previous{
 	left: 0;
+	z-index: 12;
 
 }
 
 .next {
 	right: 0;
+	z-index: 12;
 
 }
 }
@@ -225,7 +228,7 @@ a:hover {
 	opacity: 0;
 	transform: translateY(100%);
 	transition: transform 0.5s, opacity 0.5s;
-	z-index: 999;
+	z-index: 10;
 	bottom: 0;
 	
 }
@@ -289,7 +292,7 @@ a:hover {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		z-index: 998;
+		z-index: 10;
 	}
 
 }
