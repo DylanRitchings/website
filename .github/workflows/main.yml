@@ -1,39 +1,39 @@
-name: Gallery Deployment
+# name: Gallery Deployment
 
-on:
-  push:
-    branches:
-      - main
-permissions:
-  contents: write
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# on:
+#   push:
+#     branches:
+#       - main
+# permissions:
+#   contents: write
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: Checkout main branch
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout main branch
+#       uses: actions/checkout@v3
       
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.x
+#     - name: Set up Python
+#       uses: actions/setup-python@v3
+#       with:
+#         python-version: 3.x
       
-    - name: Install dependencies
-      run: |
-        pip install pillow
-        pip install chevron &
-        git fetch
-        git checkout -b live        
+#     - name: Install dependencies
+#       run: |
+#         pip install pillow
+#         pip install chevron &
+#         git fetch
+#         git checkout -b live        
       
-    - name: Run gallery script
-      run: |
-        cd templates
-        python gallery.py
-        git config --global user.name 'Dylan Ritchings'
-        git config --global user.email 'DylanRitchings@users.noreply.github.com'
-        git add ..
-        git commit -m "auto-generated html"
-        git push origin live --force
+#     - name: Run gallery script
+#       run: |
+#         cd templates
+#         python gallery.py
+#         git config --global user.name 'Dylan Ritchings'
+#         git config --global user.email 'DylanRitchings@users.noreply.github.com'
+#         git add ..
+#         git commit -m "auto-generated html"
+#         git push origin live --force
   
 
