@@ -3,96 +3,121 @@ import os
 from PIL import Image 
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-folder = "../gallery/photos/"
+# folder = "../gallery/photos/"
+#
+# image_folder = "photos/"
+# thumb_folder = "thumbnails/"
+# page_folder = "../gallery/" #TODO uppercase these, also rename 
 
-image_folder = "photos/"
-thumb_folder = "thumbnails/"
-page_folder = "../gallery/" #TODO uppercase these, also rename 
+GALLERY_DIR="/gallery/"
+PHOTO_DIR=f"{GALLERY_DIR}photos/"
+THUM_DIR=f"{PHOTO_DIR}thumbnails/"
+PLCHOLD_DIR=f"{THUM_DIR}placeholder/"
+ORIG_DIR=f"{PHOTO_DIR}original/"
+
+ORIG_PATH = f"..{ORIG_DIR}"
+THUM_PATH = f"..{THUM_DIR}"
+PLCHOLD_PATH = f"..{PLCHOLD_DIR}"
+PHOTO_PATH = f"..{PHOTO_DIR}"
+
 GALLERY_AMOUNT = 16
 
 def create_progressive(image):
-    path = f"{folder}{image}" 
+    path = f"{PHOTO_PATH}{image}" 
     if not os.path.exists(path):
-        im = Image.open(f"{folder}original/{image}")
+        im = Image.open(f"{ORIG_PATH}{image}")
         im.save(path, quality=100, progressive=True)
 
 def create_thumbnails(image):
-    thumb_path = f"{folder}{thumb_folder}"
-    if not os.path.exists(thumb_path):
-        os.makedirs(thumb_path)
-    thumb_filepath = f"{thumb_path}{image}"
+    if not os.path.exists(THUM_PATH):
+        os.makedirs(THUM_PATH)
+    thumb_filepath = f"{THUM_PATH}{image}"
     
     if not os.path.exists(thumb_filepath):
-        im = Image.open(f"{folder}original/{image}")
+        im = Image.open(f"{ORIG_PATH}{image}")
         ph = im.copy()
         im.save(thumb_filepath, "JPEG", quality=20, progressive=True)
-        ph.save(f"{thumb_path}placeholder/{image}", "JPEG", quality=5, progressive=True)
+        ph.save(f"{PLCHOLD_PATH}{image}", "JPEG", quality=5, progressive=True)
 
 
 def create_image_file(image_list, img_idx, gallery_num):
     current_image = image_list[img_idx].split(".")[0]
+    gallery_dir = f"{GALLERY_DIR}{gallery_num}/"
+    image_dir = f"{gallery_dir}{current_image}/"
+    image_path = f"..{image_dir}"
+
+    if not os.path.exists(image_path):
+        os.makedirs(image_path)
+
     args = {
-        "gallery": f"gallery{gallery_num}.html",
-        "image_path": f"{image_folder}{current_image}.jpg",
-        "placeholder": f"{image_folder}{thumb_folder}{current_image}.jpg",
+        "gallery": gallery_dir,
+        "image_path": f"{PHOTO_DIR}{current_image}.jpg",
+        "placeholder": f"{PLCHOLD_DIR}{current_image}.jpg",
         "small_images": []
     }
 
     if img_idx - 1 >= 0:
         prev_image = image_list[img_idx - 1].split(".")[0]
-        args["prev_image"] = f"{prev_image}.html"
+        args["prev_image"] = f"{gallery_dir}{prev_image}/"
     else:
         args["prev_image"] = "#"
 
     if img_idx + 1 < len(image_list):
         next_image = image_list[img_idx + 1].split(".")[0]
-        args["next_image"] = f"{next_image}.html"
+        args["next_image"] = f"{gallery_dir}{next_image}/"
     else:
         args["next_image"] = "#"
 
 
+    
+    # image selector
     for idx, image in enumerate(image_list):
-        if idx < img_idx:
-            alignment = "left"
-        elif idx > img_idx:
-            alignment = "right"
-        else:
-            alignment = "center"
+        # if idx < img_idx:
+        #     alignment = "left"
+        # elif idx > img_idx:
+        #     alignment = "right"
+        # else:
+        #     alignment = "center"
         args["small_images"].append(
             {   
                 
-                "link": f"{image.split(".")[0]}.html",
-                "src": f"{image_folder}{thumb_folder}{image}",
-                "alignment": alignment
+                "link": f"{gallery_dir}{image.split(".")[0]}",
+                "src": f"{THUM_DIR}{image}",
+                # "alignment": alignment
             }
         )
     with open("image-template.html", "r") as f:
         output = chevron.render(f, args)
-    with open(f"{page_folder}{current_image}.html", "w") as f:
+    with open(f"{image_path}index.html", "w") as f:
         f.write(output)
 
 
 def create_gallery_file(image_list, gallery_num):
+    gallery_dir = f"{GALLERY_DIR}{gallery_num}/"
+    gallery_path = f"..{gallery_dir}"
 
+    if not os.path.exists(gallery_path):
+        os.makedirs(gallery_path)
 
     args = {
         "gallery": [],
-        "prev_gallery": f"gallery{gallery_num-1}.html" if gallery_num - 1 > 0 else "",
-        "next_gallery": f"gallery{gallery_num+1}.html" if len(image_list) == GALLERY_AMOUNT else "", #TODO do this another way
+        "prev_gallery": f"{GALLERY_DIR}{gallery_num-1}/" if gallery_num - 1 > 0 else "",
+        "this_gallery": gallery_dir,
+        "next_gallery": f"{GALLERY_DIR}{gallery_num+1}/" if len(image_list) == GALLERY_AMOUNT else "", #TODO do this another way
     }
     
     for image in image_list:
 
         args["gallery"].append(
                 {
-                "link": f"{page_folder}{image.split(".")[0]}.html",
-                "src": f"{folder}{thumb_folder}{image}",
-                "placeholder": f"{folder}{thumb_folder}placeholder/{image}"
+                "link": f"{gallery_dir}{image.split(".")[0]}/",
+                "src": f"{THUM_DIR}{image}",
+                "placeholder": f"{PLCHOLD_DIR}{image}"
             }
         )
     with open("gallery-template.html", "r") as f:
         output = chevron.render(f, args)
-    with open(f"{page_folder}gallery{gallery_num}.html", "w") as f:
+    with open(f"{gallery_path}index.html", "w") as f:
         f.write(output)
        
 
@@ -102,7 +127,8 @@ next_image_list = [] #5 per page
 
 gallery_count = 0
 gallery_num = 1
-file_list = os.listdir(f"{folder}original/")
+file_list = os.listdir(ORIG_PATH)
+print(file_list)
 file_list_len = len(file_list) -1
 
 
