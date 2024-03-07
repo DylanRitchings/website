@@ -14,11 +14,14 @@ PHOTO_DIR=f"{GALLERY_DIR}photos/"
 THUM_DIR=f"{PHOTO_DIR}thumbnails/"
 PLCHOLD_DIR=f"{THUM_DIR}placeholder/"
 ORIG_DIR=f"{PHOTO_DIR}original/"
+PHOTO_PAGE_DIR = f"{GALLERY_DIR}image/"
+
 
 ORIG_PATH = f"..{ORIG_DIR}"
 THUM_PATH = f"..{THUM_DIR}"
 PLCHOLD_PATH = f"..{PLCHOLD_DIR}"
 PHOTO_PATH = f"..{PHOTO_DIR}"
+PHOTO_PAGE_PATH = f"..{PHOTO_PAGE_DIR}"
 
 GALLERY_AMOUNT = 16
 
@@ -45,9 +48,11 @@ def create_image_file(image_list, img_idx, gallery_num):
     gallery_dir = f"{GALLERY_DIR}{gallery_num}/"
     image_dir = f"{gallery_dir}{current_image}/"
     image_path = f"..{image_dir}"
+    photo_page_dir = f"{PHOTO_PAGE_DIR}{current_image}/"
+    photo_page_path = f"..{photo_page_dir}"
 
-    if not os.path.exists(image_path):
-        os.makedirs(image_path)
+    if not os.path.exists(photo_page_path):
+        os.makedirs(photo_page_path)
 
     args = {
         "gallery": gallery_dir,
@@ -81,14 +86,14 @@ def create_image_file(image_list, img_idx, gallery_num):
         args["small_images"].append(
             {   
                 
-                "link": f"{gallery_dir}{image.split(".")[0]}",
+                "link": f"{PHOTO_PAGE_PATH}{image.split(".")[0]}",
                 "src": f"{THUM_DIR}{image}",
-                # "alignment": alignment
+                "alignment": ""
             }
         )
     with open("image-template.html", "r") as f:
         output = chevron.render(f, args)
-    with open(f"{image_path}index.html", "w") as f:
+    with open(f"{photo_page_path}index.html", "w") as f:
         f.write(output)
 
 
@@ -110,7 +115,7 @@ def create_gallery_file(image_list, gallery_num):
 
         args["gallery"].append(
                 {
-                "link": f"{gallery_dir}{image.split(".")[0]}/",
+                "link": f"{PHOTO_PAGE_DIR}{image.split(".")[0]}/",
                 "src": f"{THUM_DIR}{image}",
                 "placeholder": f"{PLCHOLD_DIR}{image}"
             }
