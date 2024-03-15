@@ -36,11 +36,16 @@ def create_thumbnails(image):
         os.makedirs(THUM_PATH)
     thumb_filepath = f"{THUM_PATH}{image}"
     
-    if not os.path.exists(thumb_filepath):
-        im = Image.open(f"{ORIG_PATH}{image}")
-        ph = im.copy()
-        im.save(thumb_filepath, "JPEG", quality=20, progressive=True)
-        ph.save(f"{PLCHOLD_PATH}{image}", "JPEG", quality=5, progressive=True)
+    # if not os.path.exists(thumb_filepath):
+    im = Image.open(f"{ORIG_PATH}{image}")
+    w, h = im.size
+    nw = int(w*0.3)
+    nh = int(h*0.3)
+    im = im.resize((nw, nh))
+    print(im.size)
+    ph = im.copy()
+    im.save(thumb_filepath, "JPEG", quality=50, progressive=True)
+    ph.save(f"{PLCHOLD_PATH}{image}", "JPEG", quality=30, progressive=True)
 
 
 def create_image_file(image_list, img_idx, gallery_num):
@@ -57,19 +62,19 @@ def create_image_file(image_list, img_idx, gallery_num):
     args = {
         "gallery": gallery_dir,
         "image_path": f"{PHOTO_DIR}{current_image}.jpg",
-        "placeholder": f"{PLCHOLD_DIR}{current_image}.jpg",
+        "placeholder": f"{THUM_DIR}{current_image}.jpg",
         "small_images": []
     }
 
     if img_idx - 1 >= 0:
         prev_image = image_list[img_idx - 1].split(".")[0]
-        args["prev_image"] = f"{gallery_dir}{prev_image}/"
+        args["prev_image"] = f"{PHOTO_PAGE_DIR}{prev_image}/"
     else:
         args["prev_image"] = "#"
 
     if img_idx + 1 < len(image_list):
         next_image = image_list[img_idx + 1].split(".")[0]
-        args["next_image"] = f"{gallery_dir}{next_image}/"
+        args["next_image"] = f"{PHOTO_PAGE_DIR}{next_image}/"
     else:
         args["next_image"] = "#"
 
@@ -86,7 +91,7 @@ def create_image_file(image_list, img_idx, gallery_num):
         args["small_images"].append(
             {   
                 
-                "link": f"{PHOTO_PAGE_PATH}{image.split(".")[0]}",
+                "link": f"{PHOTO_PAGE_DIR}{image.split(".")[0]}",
                 "src": f"{THUM_DIR}{image}",
                 "alignment": ""
             }
