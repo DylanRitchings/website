@@ -36,16 +36,16 @@ def create_thumbnails(image):
         os.makedirs(THUM_PATH)
     thumb_filepath = f"{THUM_PATH}{image}"
     
-    # if not os.path.exists(thumb_filepath):
-    im = Image.open(f"{ORIG_PATH}{image}")
-    w, h = im.size
-    nw = int(w*0.3)
-    nh = int(h*0.3)
-    im = im.resize((nw, nh))
-    print(im.size)
-    ph = im.copy()
-    im.save(thumb_filepath, "JPEG", quality=50, progressive=True)
-    ph.save(f"{PLCHOLD_PATH}{image}", "JPEG", quality=30, progressive=True)
+    if not os.path.exists(thumb_filepath):
+        im = Image.open(f"{ORIG_PATH}{image}")
+        w, h = im.size
+        nw = int(w*0.3)
+        nh = int(h*0.3)
+        im = im.resize((nw, nh))
+        print(im.size)
+        ph = im.copy()
+        im.save(thumb_filepath, "JPEG", quality=50, progressive=True)
+        ph.save(f"{PLCHOLD_PATH}{image}", "JPEG", quality=30, progressive=True)
 
 
 def create_image_file(image_list, img_idx, gallery_num):
