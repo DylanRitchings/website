@@ -116,7 +116,7 @@ hr {
 }
 
 .large_photo{
-	max-height: 98vh;
+	height: 98vh;
 	max-width: 98vw;
 	position: absolute;
 	top: 50%; 
