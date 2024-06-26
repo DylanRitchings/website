@@ -61,6 +61,7 @@ hr {
 
 .gallery_photo{
 	position: absolute;
+  object-fit: cover;
 	top: 0%; 
 	left: 0%;
 }
