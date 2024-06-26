@@ -37,11 +37,21 @@ hr {
 	overflow: hidden;
 }
 
-
-
+@keyframes changeOpacity {
+  0% {
+    opacity: 0;
+  }
+  99.9% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1; /* Change to the desired opacity */
+  }
+}
 
 .main_photo{
 	z-index: 2;
+  animation: changeOpacity 0s 2s forwards;
 }
 
 .placeholder{
@@ -80,6 +90,8 @@ hr {
 }
 
 .selector_photo{
+  object-fit: contain;
+  width: 100%;
 	max-width: 100%; 
 	overflow: hidden;
 }
@@ -116,10 +128,11 @@ hr {
 }
 
 .large_photo{
-	height: auto;
+	height: 98vh;
 	width: auto;
 	max-width: 98vw;
 	max-height: 98vh;
+  object-fit: contain;
 	position: absolute;
 	top: 50%; 
 	left: 50%;
