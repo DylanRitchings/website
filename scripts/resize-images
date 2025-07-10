@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+# Directory paths
+SRC_DIR="./public/gallery"
+DEST_DIR="./public/resized"
+
+# Sizes to generate
+SIZES=(400 800 1200)
+
+# Create resized directories and resize images
+for size in "${SIZES[@]}"; do
+  mkdir -p "${DEST_DIR}/${size}"
+  for img in "${SRC_DIR}"/*.jpg; do
+    filename=$(basename "$img")
+    magick "$img" -resize "${size}" "${DEST_DIR}/${size}/${filename}"
+  done
+done
+
+echo "Resizing complete!"
