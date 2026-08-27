@@ -33,20 +33,54 @@
 //   );
 // }
 // app/layout.tsx
-import './globals.css';
-import Navbar from '@/components/Navbar';
+import type { Metadata } from "next";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
 
-export const metadata = {
-  title: 'Dylan Ritchings',
-  description: 'Gallery + CV',
+const title = "Dylan Ritchings";
+const description = "Wildlife and nature photography";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://dylanrit.uk"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "https://dylanrit.uk",
+    siteName: title,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-image.jpg"],
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const themeInitScript = `(function () {
+  try {
+    var stored = localStorage.getItem('theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();`;
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <Navbar />
-        <main className="p-4">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
