@@ -49,7 +49,8 @@ export const metadata: Metadata = {
     description,
     url: "https://dylanrit.uk",
     siteName: title,
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    // no width/height: nginx swaps this URL for the photo in ?photo= links, which has other dimensions
+    images: [{ url: "/og-image.jpg" }],
     type: "website",
   },
   twitter: {
